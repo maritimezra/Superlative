@@ -12,9 +12,10 @@ class Level(models.TextChoices):
 
 
 class Category(models.TextChoices):
-    GameNight = "G"
+    Party = "P"
     Couples = "C"
     Teens = "T"
+    Work = "W"
 
 
 class Player(models.Model):

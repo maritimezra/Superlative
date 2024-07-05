@@ -11,6 +11,9 @@ import partyWildQuestions from './questions/party/wild.json';
 import teensMildQuestions from './questions/teens/mild.json';
 import teensModQuestions from './questions/teens/mod.json';
 import teensWildQuestions from './questions/teens/wild.json';
+import workMildQuestions from './questions/work/mild.json';
+import workModQuestions from './questions/work/mod.json';
+import workWildQuestions from './questions/work/wild.json';
 
 
 const GET_LOBBY = gql`
@@ -66,7 +69,7 @@ const Superlative = () => {
             throw new Error('Invalid level');
         }
         break;
-      case 'GameNight':
+      case 'Party':
         switch (level) {
           case 'Mild':
             questions = partyMildQuestions.Questions;
@@ -96,6 +99,21 @@ const Superlative = () => {
             throw new Error('Invalid level');
         }
         break;
+      case 'Work':
+        switch (level) {
+          case 'Mild':
+            questions = workMildQuestions.Questions;
+            break;
+          case 'Moderate':
+            questions = workModQuestions.Questions;
+            break;
+          case 'Wild':
+            questions = workWildQuestions.Questions;
+            break;
+          default:
+            throw new Error('Invalid level');
+            }
+            break;
       default:
         throw new Error('Invalid category');
     }

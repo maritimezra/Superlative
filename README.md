@@ -15,3 +15,9 @@ The Superlative Game is a fun and engaging party game designed to break the ice 
   - **Levels**: Mild, Moderate, Wild
 - **Wide Range of Questions**: Each category and level has a diverse set of questions tailored to the context.
 - **Game Control**: Players have the option to end the game at any point.
+
+## Usage
+1. **Sign Up/Login**: Create a new account or log in with existing credentials.
+2. **Create a Lobby**: Select a category and level to start a new lobby.
+3. **Join a Game**: Players can join an existing lobby and start answering questions.
+4. **End Game**: Option to end the game at any point during the session.

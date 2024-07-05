@@ -9,6 +9,7 @@ import LobbyInstance from './components/LobbyInstance';
 import PrivateRoute from './components/PrivateRoute';
 import Superlative from './components/Superlative';
 import Logout from './components/Logout';
+import Layout from './components/Layout';
 
 const httpLink = createHttpLink({
     uri: 'http://127.0.0.1:8000/graphql/',
@@ -31,17 +32,19 @@ const httpLink = createHttpLink({
 
 const App = () => {
     return (
-        <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
       <Router>
-        <Routes>
-        <Route path="/" element={<PrivateRoute element={Home} />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/create-lobby" element={<PrivateRoute element={CreateLobby} />} />
-          <Route path="/lobby-details" element={<PrivateRoute element={LobbyInstance} />} />
-          <Route path="/play-game" element={<PrivateRoute element={Superlative} />} />
-          <Route path="/logout" element={<Logout />} />
-          </Routes>
+        <Layout>
+          <Routes>
+              <Route path="/" element={<PrivateRoute element={Home} />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/create-lobby" element={<PrivateRoute element={CreateLobby} />} />
+              <Route path="/lobby-details" element={<PrivateRoute element={LobbyInstance} />} />
+              <Route path="/play-game" element={<PrivateRoute element={Superlative} />} />
+              <Route path="/logout" element={<Logout />} />
+            </Routes>
+          </Layout>
       </Router>
     </ApolloProvider>
     

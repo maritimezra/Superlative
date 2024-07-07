@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useQuery, gql } from '@apollo/client';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -14,12 +14,32 @@ const GET_LOBBIES = gql`
   }
 `;
 
+const GET_USERNAME = gql`
+  query GetUsername {
+    getUsername {
+      username
+    }
+  }
+`;
+
 const Home = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [username, setUsername] = useState('');
+
+
+  const { loading: usernameLoading, error: usernameError, data: usernameData } = useQuery(GET_USERNAME,{
+    fetchPolicy: 'network-only',
+    onError: () => {
+      navigate('/login');
+    },
+  });
 
   const { loading, error, data, refetch } = useQuery(GET_LOBBIES, {
-    fetchPolicy: 'network-only'
+    fetchPolicy: 'network-only',
+    onError: () => {
+      navigate('/login');
+    },
   });
 
   const handleCreateNew = () => {
@@ -27,17 +47,27 @@ const Home = () => {
   };
 
 
+
   useEffect(() => {
     refetch();
   }, [location.key, refetch]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error.message}</p>;
+  useEffect(() => {
+    if (usernameData && usernameData.getUsername) {
+      setUsername(usernameData.getUsername.username);
+    }
+  }, [usernameData]);
+
+  if (loading || usernameLoading) return <p>Loading...</p>;
+  if (error || usernameError) return <p>{error ? error.message : usernameError.message}</p>;
 
   const lobbies = data.getLobbies;
 
   return (
     <div className="home">
+      <div>
+        <h2>{`Hi, ${username}`}</h2>
+      </div>
       <div className="lobbies-section">
         <h2>Your Lobbies</h2>
         <ul>

@@ -8,7 +8,6 @@ import CreateLobby from './components/CreateLobby';
 import LobbyInstance from './components/LobbyInstance';
 import PrivateRoute from './components/PrivateRoute';
 import Superlative from './components/Superlative';
-import Logout from './components/Logout';
 import Layout from './components/Layout';
 
 const httpLink = createHttpLink({
@@ -42,7 +41,6 @@ const App = () => {
               <Route path="/create-lobby" element={<PrivateRoute element={CreateLobby} />} />
               <Route path="/lobby-details" element={<PrivateRoute element={LobbyInstance} />} />
               <Route path="/play-game" element={<PrivateRoute element={Superlative} />} />
-              <Route path="/logout" element={<Logout />} />
             </Routes>
           </Layout>
       </Router>

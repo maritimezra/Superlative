@@ -38,7 +38,7 @@ const ProfileModal = ({ isOpen, onClose }) => {
       await client.resetStore();
       localStorage.removeItem('token');
       onClose();
-      navigate('/login');
+      navigate('/')
     } catch (error) {
       console.error('Error logging out:', error);
     }

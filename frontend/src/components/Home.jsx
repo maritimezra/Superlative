@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useQuery, gql } from '@apollo/client';
 import { useNavigate, useLocation } from 'react-router-dom';
+import LoginModal from './LoginModal';
 
 
 const GET_LOBBIES = gql`
@@ -26,19 +27,24 @@ const Home = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [username, setUsername] = useState('');
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const handleCloseModal = () => {
+    setShowLoginModal(false);
+  };
 
 
   const { loading: usernameLoading, error: usernameError, data: usernameData } = useQuery(GET_USERNAME,{
     fetchPolicy: 'network-only',
     onError: () => {
-      navigate('/login');
+      setShowLoginModal(true);
     },
   });
 
   const { loading, error, data, refetch } = useQuery(GET_LOBBIES, {
     fetchPolicy: 'network-only',
     onError: () => {
-      navigate('/login');
+      setShowLoginModal(true);
     },
   });
 
@@ -79,7 +85,7 @@ const Home = () => {
         </ul>
         <button onClick={handleCreateNew}>Create New</button>
       </div>
-
+      <LoginModal isOpen={showLoginModal} onClose={handleCloseModal} />
     </div>
   );
 };

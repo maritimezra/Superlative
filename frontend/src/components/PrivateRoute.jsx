@@ -1,10 +1,22 @@
-import { Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import LoginModal from './LoginModal'; 
 
 const PrivateRoute = ({ element: Component }) => {
   const token = localStorage.getItem('token');
+  const [showLoginModal, setShowLoginModal] = useState(!token);
 
-  return token ? <Component /> : <Navigate to="/login" />;
+  useEffect(() => {
+    if (!token) {
+      setShowLoginModal(true);
+    }
+  }, [token]);
+
+  const handleCloseModal = () => {
+    setShowLoginModal(false);
+  };
+
+  return token ? <Component /> : <LoginModal isOpen={showLoginModal} onClose={handleCloseModal} />;
 };
 
 PrivateRoute.propTypes = {

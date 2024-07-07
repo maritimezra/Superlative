@@ -40,12 +40,15 @@ const SignupModal = ({ isOpen, onClose }) => {
       });
   };
 
+  const handleBack = () => {
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   return (
     <div className="modal">
       <div className="modal-content">
-        <span className="close" onClick={onClose}>&times;</span>
         <h2>Create Account</h2>
         <input
           type="email"
@@ -72,6 +75,7 @@ const SignupModal = ({ isOpen, onClose }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button onClick={handleSignup}>Sign Up</button>
+        <button onClick={handleBack}>Back</button>
       </div>
     </div>
   );

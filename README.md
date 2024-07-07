@@ -1,4 +1,4 @@
-# Superlative Game Web Application
+# Superlative Web Application
 
 ## Overview
 The Superlative Game is a fun and engaging party game designed to break the ice and foster team bonding in various settings such as parties, couples, teens, and work environments. The application is built with a Django backend, GraphQL API, and a React frontend.
